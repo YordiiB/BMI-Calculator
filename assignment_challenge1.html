@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>BMI Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333333;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    input[type="number"],
+    input[type="submit"] {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #cccccc;
+      border-radius: 3px;
+      box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+      background-color: #4caf50;
+      color: #ffffff;
+      cursor: pointer;
+    }
+
+    .result {
+      text-align: center;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .image-container {
+      text-align: center;
+    }
+
+    .image-container img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>BMI Calculator</h1>
+  <div class="container">
+    <form id="bmiForm">
+      <label for="height">Height (cm):</label>
+      <input type="number" id="height" required>
+
+      <label for="weight">Weight (kg):</label>
+      <input type="number" id="weight" required>
+
+      <input type="submit" value="Calculate BMI">
+    </form>
+    <div class="result" id="result"></div>
+    <div class="image-container">
+      <img src="https://th.bing.com/th/id/OIP.QonZB48qXdtWHxv3XcIVogHaD4?rs=1&pid=ImgDetMain" alt="BMI Image">
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('bmiForm');
+    const resultDiv = document.getElementById('result');
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      calculateBMI();
+    });
+
+    function calculateBMI() {
+      const heightInput = document.getElementById('height');
+      const weightInput = document.getElementById('weight');
+
+      const height = parseFloat(heightInput.value);
+      const weight = parseFloat(weightInput.value);
+
+      if (isNaN(height) || isNaN(weight) || height <= 0 || weight <= 0) {
+        resultDiv.textContent = 'Please enter valid values for height and weight.';
+        return;
+      }
+
+      const bmi = weight / ((height / 100) ** 2);
+      const roundedBMI = bmi.toFixed(2);
+
+      resultDiv.textContent = `Your BMI is ${roundedBMI}.`;
+    }
+  </script>
+</body>
+
+</html>
